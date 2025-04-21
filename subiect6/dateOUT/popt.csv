@@ -1,0 +1,76 @@
+CountryId,Country,Cluster
+1,Afghanistan,C2
+2,Albania,C1
+3,Algeria,C2
+4,Argentina,C1
+5,Australia,C2
+6,Austria,C1
+7,Bangladesh,C1
+8,Belgium,C1
+9,Brazil,C2
+10,Canada,C2
+11,Chile,C3
+12,China,C1
+13,Colombia,C3
+14,Croatia,C2
+15,Cuba,C2
+16,Czech Republic,C1
+17,Denmark,C1
+18,Egypt,C2
+19,Ethiopia,C1
+20,Finland,C3
+21,France,C2
+22,Germany,C1
+23,Ghana,C1
+24,Greece,C1
+25,Hungary,C1
+26,India,C3
+27,Indonesia,C3
+28,Iran,C2
+29,Iraq,C1
+30,Ireland,C2
+31,Israel,C2
+32,Italy,C1
+33,Japan,C3
+34,Kenya,C2
+35,Malaysia,C3
+36,Mexico,C1
+37,Morocco,C1
+38,Nepal,C3
+39,Netherlands,C1
+40,New Zealand,C1
+41,Nigeria,C3
+42,Norway,C3
+43,Pakistan,C3
+44,Peru,C3
+45,Philippines,C3
+46,Poland,C3
+47,Portugal,C1
+48,Romania,C3
+49,Russia,C2
+50,Saudi Arabia,C1
+51,South Korea,C1
+52,Spain,C1
+53,Sri Lanka,C3
+54,Sweden,C2
+55,Switzerland,C3
+56,Syria,C3
+57,Taiwan,C3
+58,Tanzania,C1
+59,Thailand,C3
+60,Tunisia,C2
+61,Turkey,C2
+62,Uganda,C1
+63,Ukraine,C3
+64,United Arab Emirates,C3
+65,United Kingdom,C2
+66,United States,C2
+67,Uruguay,C1
+68,Venezuela,C3
+69,Vietnam,C2
+70,Yemen,C3
+71,Zambia,C1
+72,Zimbabwe,C3
+73,Ecuador,C3
+74,El Salvador,C1
+75,Estonia,C2

@@ -1,0 +1,170 @@
+Country,Code,Clusters
+Afghanistan,AFG,C2
+Albania,ALB,C4
+Algeria,DZA,C2
+Andorra,AND,C3
+Angola,AGO,C4
+Antigua and Barbuda,ATG,C4
+Argentina,ARG,C5
+Armenia,ARM,C4
+Australia,AUS,C3
+Austria,AUT,C3
+Azerbaijan,AZE,C1
+Bahamas,BHS,C4
+Bahrain,BHR,C2
+Bangladesh,BGD,C2
+Barbados,BRB,C5
+Belarus,BLR,C3
+Belgium,BEL,C3
+Belize,BLZ,C4
+Benin,BEN,C1
+Bhutan,BTN,C2
+Bolivia,BOL,C4
+Bosnia and Herzegovina,BIH,C4
+Botswana,BWA,C5
+Brazil,BRA,C5
+Bulgaria,BGR,C3
+Burkina Faso,BFA,C3
+Burundi,BDI,C5
+Cambodia,KHM,C1
+Cameroon,CMR,C4
+Canada,CAN,C5
+Cape Verde,CPV,C4
+Central African Republic,CAF,C1
+Chad,TCD,C1
+Chile,CHL,C5
+China,CHN,C4
+Colombia,COL,C4
+Comoros,COM,C2
+Congo,COG,C4
+Costa Rica,CRI,C4
+Cote d'Ivoire,CIV,C1
+Croatia,HRV,C3
+Cuba,CUB,C4
+Cyprus,CYP,C3
+Denmark,DNK,C3
+Djibouti,DJI,C2
+Dominica,DMA,C3
+Dominican Republic,DOM,C4
+Ecuador,ECU,C4
+Egypt,EGY,C2
+El Salvador,SLV,C1
+Equatorial Guinea,GNQ,C5
+Eritrea,ERI,C2
+Estonia,EST,C3
+Ethiopia,ETH,C2
+Fiji,FJI,C1
+Finland,FIN,C3
+France,FRA,C3
+Gabon,GAB,C3
+Gambia,GMB,C1
+Georgia,GEO,C5
+Germany,DEU,C3
+Ghana,GHA,C1
+Greece,GRC,C3
+Grenada,GRD,C3
+Guatemala,GTM,C1
+Guinea,GIN,C2
+Guinea-Bissau,GNB,C4
+Guyana,GUY,C5
+Haiti,HTI,C1
+Honduras,HND,C1
+Hungary,HUN,C3
+Iceland,ISL,C5
+India,IND,C1
+Indonesia,IDN,C2
+Iraq,IRQ,C2
+Ireland,IRL,C3
+Israel,ISR,C1
+Italy,ITA,C5
+Jamaica,JAM,C4
+Japan,JPN,C5
+Jordan,JOR,C2
+Kazakhstan,KAZ,C5
+Kenya,KEN,C1
+Kiribati,KIR,C2
+Kuwait,KWT,C2
+Kyrgyzstan,KGZ,C5
+Latvia,LVA,C3
+Lebanon,LBN,C2
+Lesotho,LSO,C4
+Liberia,LBR,C4
+Lithuania,LTU,C3
+Luxembourg,LUX,C3
+Madagascar,MDG,C2
+Malawi,MWI,C1
+Malaysia,MYS,C2
+Maldives,MDV,C2
+Mali,MLI,C2
+Malta,MLT,C4
+Mauritania,MRT,C2
+Mauritius,MUS,C4
+Mexico,MEX,C4
+Mongolia,MNG,C5
+Montenegro,MNE,C5
+Morocco,MAR,C2
+Mozambique,MOZ,C2
+Myanmar,MMR,C1
+Namibia,NAM,C1
+Nauru,NRU,C4
+Nepal,NPL,C2
+Netherlands,NLD,C3
+New Zealand,NZL,C3
+Nicaragua,NIC,C4
+Niger,NER,C2
+Nigeria,NGA,C3
+Norway,NOR,C5
+Oman,OMN,C2
+Pakistan,PAK,C2
+Panama,PAN,C4
+Papua New Guinea,PNG,C2
+Paraguay,PRY,C4
+Peru,PER,C4
+Philippines,PHL,C4
+Poland,POL,C3
+Portugal,PRT,C3
+Qatar,QAT,C2
+Romania,ROU,C3
+Rwanda,RWA,C3
+Saint Kitts and Nevis,KNA,C3
+Saint Lucia,LCA,C3
+Saint Vincent and the Grenadines,VCT,C4
+Samoa,WSM,C1
+Sao Tome and Principe,STP,C5
+Saudi Arabia,SAU,C2
+Senegal,SEN,C2
+Serbia,SRB,C5
+Seychelles,SYC,C3
+Sierra Leone,SLE,C4
+Singapore,SGP,C2
+Slovakia,SVK,C3
+Slovenia,SVN,C3
+Solomon Islands,SLB,C2
+Somalia,SOM,C2
+South Africa,ZAF,C3
+Spain,ESP,C3
+Sri Lanka,LKA,C1
+Sudan,SDN,C1
+Suriname,SUR,C4
+Sweden,SWE,C5
+Switzerland,CHE,C3
+Tajikistan,TJK,C1
+Thailand,THA,C5
+Togo,TGO,C2
+Tonga,TON,C2
+Trinidad and Tobago,TTO,C4
+Tunisia,TUN,C2
+Turkey,TUR,C2
+Turkmenistan,TKM,C4
+Tuvalu,TUV,C2
+Uganda,UGA,C3
+Ukraine,UKR,C3
+United Arab Emirates,ARE,C1
+United Kingdom,GBR,C3
+Uruguay,URY,C5
+Uzbekistan,UZB,C1
+Vanuatu,VUT,C2
+Venezuela,VEN,C5
+Yemen,YEM,C2
+Zambia,ZMB,C4
+Zimbabwe,ZWE,C1

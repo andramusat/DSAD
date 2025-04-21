@@ -1,0 +1,255 @@
+METODE DE ANALIZĂ STATISTICĂ
+
+CCA
+
+import numpy as np
+from sklearn.cross_decomposition import CCA
+
+x = np.ndarray() # standardized
+y = np.ndarray() # standardized
+
+p = x.shape[1]
+q = y.shape[1]
+m = min(p, q)
+cca = CCA(n_components=m)
+z, u = cca.fit_transform(x, y)
+rxz = np.corrcoef(x, z[:, :m], rowvar=False)[:p, p:]
+ryu = np.corrcoef(y, u[:, :m], rowvar=False)[:q, q:]
+r = []
+for i in range(m):
+    r.append(np.corrcoef(z[:, i], u[:, i], rowvar=False)[0, 1])
+ 
+--CCA (Canonical Correlation Analysis) este o metodă statistică utilizată pentru a găsi relațiile liniare dintre două seturi de variabile.
+
+📌 Ce face concret codul?
+-Standardizează datele x  și y (presupunând că sunt deja normalizate).
+-Calculează componentele canonice z  și u,  care maximizează corelația dintre variabilele din x  și y.
+-Determină corelațiile dintre variabilele originale și componentele rezultate.
+-Calculează corelațiile canonice r,  care arată cât de bine sunt corelate componentele extrase între cele două seturi de variabile.
+📌 Rolul CCA
+CCA este folosit pentru a identifica și interpreta relațiile dintre două seturi de date diferite, dar corelate (ex: relația dintre performanțele academice și testele psihologice).
+
+EFA
+
+import numpy as np
+from factor_analyzer import FactorAnalyzer, calculate_kmo
+
+x = np.ndarray() # standardized
+
+kmo = calculate_kmo(x) # kmo[1] needs to be > 0.6
+
+efa = FactorAnalyzer(n_factors=x.shape[1] - 1) # n_factors needs to be no. columns - 1
+scores = efa.fit_transform(x)
+factorLoadings = efa.loadings_
+eigenvalues = efa.get_eigenvalues()
+communalities = efa.get_communalities()
+specificFactors = efa.get_uniquenesses()
+
+--EFA (Exploratory Factor Analysis) este o metodă statistică utilizată pentru a descoperi structuri latente (factori) într-un set de variabile și pentru a reduce dimensiunea datelor.
+
+📌 Ce face concret codul?
+-Calculează KMO (Kaiser-Meyer-Olkin), o măsură care verifică dacă datele sunt potrivite pentru analiza factorială (valoarea trebuie să fie > 0.6).
+-Aplică EFA folosind un număr de factori = numărul de coloane - 1.
+-Obține factorii latenti (scores) și matricea de încărcături factoriale (factorLoadings).
+-Calculează valorile proprii (eigenvalues) – indică importanța fiecărui factor.
+-Determină comunalitățile (proporția varianței explicate de factori pentru fiecare variabilă).
+-Calculează unicitatea fiecărei variabile (partea din variabilă care nu este explicată de factori).
+📌 Rolul EFA
+EFA este folosit pentru a identifica structuri ascunse în date, a reduce dimensionalitatea și a găsi relații între variabile. Este aplicat în psihologie, sociologie, economie, etc.
+
+HCA
+
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.cluster.hierarchy import fcluster, linkage
+from sklearn.cluster import KMeans
+
+x = np.ndarray() # standardized
+
+def threshold(h: np.ndarray):
+    n = h.shape[0] # no of junctions
+    dist_1 = h[1:n, 2]
+    dist_2 = h[0:n - 1, 2]
+    diff = dist_1 - dist_2
+    j = np.argmax(diff) # junction with max. diff
+    t = (h[j, 2] + h[j + 1, 2]) / 2 # threshold
+    return t, j, n
+
+def clusters(h: np.ndarray, k):
+    cat = fcluster(h, k, criterion='maxclust')
+    return ['C' + str(i) for i in cat]
+
+HC = linkage(x, method='ward') # the method is given in the requirements
+t, j, n = threshold(HC)
+
+# determine the clusters belonging to the maximum stability partition
+k = n - j
+labels = clusters(HC, k) # add this to the original DataFrame
+
+# KMeans
+C = np.ndarray() # principal components
+kmeans = KMeans(n_clusters=5, n_init=10) # n_clusters is given in the requirements
+kmeans_labels = kmeans.fit_predict(C)
+plt.scatter(C[:, 0], C[:, 1], c=kmeans_labels, cmap='viridis')
+
+--HCA (Hierarchical Cluster Analysis) este o metodă de grupare ierarhică care construiește un dendrogramă și determină clusterele pe baza unei măsuri de similaritate între observații.
+
+📌 Ce face concret codul?
+-Calculează matricea de legături cu metoda Ward (HC = linkage(x, method='ward')).
+-Determină pragul optim pentru tăierea dendrogramei (threshold(HC)).
+-Identifică cel mai mare salt în distanțele de fuziune.
+-Calculează pragul t pentru stabilirea numărului optim de clustere.
+-Atribuie fiecare punct unui cluster (clusters(HC, k)).
+-Aplică K-Means pentru compararea rezultatelor clusteringului ierarhic cu K-Means.
+📌 Rolul HCA
+HCA este folosit pentru a identifica structuri de grupare în date, fiind util în clasificare și analiză exploratorie. Se aplică în marketing (segmentare de clienți), procesare de imagini etc.
+
+LDA
+
+import pandas as pd
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.model_selection import train_test_split
+
+x = pd.DataFrame() # DOES NOT need to be standardized
+x_applied = pd.DataFrame() # DOES NOT need to be standardized
+
+tinta = 'VULNERAB' # column specified in the requirements
+variabile = list(x.columns.values[:-1]) # the other columns
+
+x_train, x_test, y_train, y_test = train_test_split(x[variabile], x[tinta], train_size=0.4)
+lda = LinearDiscriminantAnalysis()
+lda.fit(x_train, y_train) # trains the model
+
+scores = lda.transform(x_test)
+prediction_test = lda.predict(x_test)
+prediction_applied = lda.predict(x_applied)
+
+--LDA (Linear Discriminant Analysis) este o metodă de reducere a dimensiunii și clasificare care maximizează separarea dintre clase într-un set de date etichetat.
+
+📌 Ce face concret codul?
+-Împarte datele în antrenare și testare (train_test_split).
+-Antrenează un model LDA (lda.fit(x_train, y_train)).
+-Transformă datele pentru a obține un nou spațiu cu dimensiuni reduse (lda.transform(x_test)).
+-Face predicții pentru test (lda.predict(x_test)) și pentru un nou set de date (lda.predict(x_applied)).
+📌 Rolul LDA
+LDA este utilizat pentru clasificare și reducerea dimensiunii, fiind folosit în recunoaștere facială, bioinformatică și analiza datelor economice.
+
+PCA
+
+import pandas as pd
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.model_selection import train_test_split
+
+x = pd.DataFrame() # DOES NOT need to be standardized
+x_applied = pd.DataFrame() # DOES NOT need to be standardized
+
+tinta = 'VULNERAB' # column specified in the requirements
+variabile = list(x.columns.values[:-1]) # the other columns
+
+x_train, x_test, y_train, y_test = train_test_split(x[variabile], x[tinta], train_size=0.4)
+lda = LinearDiscriminantAnalysis()
+lda.fit(x_train, y_train) # trains the model
+
+scores = lda.transform(x_test)
+prediction_test = lda.predict(x_test)
+prediction_applied = lda.predict(x_applied)
+
+--PCA (Analiza Componentelor Principale) este o metodă de reducere a dimensiunii care transformă datele într-un nou sistem de coordonate, maximizând variația și eliminând redundanța.
+
+📌 Ce face concret codul?
+-Aplică PCA (pca.fit_transform(x)) → obține noile componente principale.
+-Calculează varianța explicată (pca.explained_variance_) → măsoară importanța fiecărei componente.
+-Determină încărcăturile factorilor (rxc) → corelația variabilelor originale cu noile componente.
+-Calculează scorurile (scores = C / np.sqrt(alpha)) → reprezintă observațiile în noul spațiu redus.
+-Măsoară calitatea proiecției (quality) și contribuția fiecărei componente (contributions).
+-Obține comunalitățile (communalities) → cât din informația inițială este păstrată în noile componente.
+-Calculează procentul varianței explicate (pve = pca.explained_variance_ratio_) → arată cât de bine explică fiecare componentă variația totală.
+📌 Rolul PCA
+PCA este folosit pentru reducerea dimensiunii datelor, eliminarea colinearității și vizualizarea relațiilor dintre variabile. Se aplică în recunoaștere facială, bioinformatică, economie și machine learning.
+
+GRAFICE
+
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.cluster.hierarchy import dendrogram
+from seaborn import heatmap, kdeplot
+
+
+def correlogram(x):
+    plt.figure(figsize=(15, 11))
+    plt.title('Correlogram')
+    heatmap(data=x, vmin=-1, vmax=1, cmap='bwr', annot=True)
+
+def linePlot(alpha):
+    plt.figure(figsize=(11, 8))
+    plt.title('Line plot')
+    Xindex = ['C' + str(k + 1) for k in range(len(alpha))]
+    plt.plot(Xindex, alpha, 'bo-')
+    plt.axhline(1, color='r')
+
+def biplot(x, y):
+    plt.figure(figsize=(7, 7))
+    plt.title('Biplot CCA')
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.scatter(x[:, 0], x[:, 1], c='r', label='X')
+    plt.scatter(y[:, 0], y[:, 1], c='b', label='Y')
+    plt.legend()
+
+def dendrogram(h, labels, threshold):
+    plt.figure(figsize=(15, 8))
+    plt.title('Clusters')
+    dendrogram(h, labels=labels, leaf_rotation=30)
+    plt.axhline(threshold, c='r')
+
+def correlationCircle(data):
+    plt.figure(figsize=(12, 12))
+    plt.title('Correlation circle')
+    T = [t for t in np.arange(0, np.pi*2, 0.01)]
+    X = [np.cos(t) for t in T]
+    Y = [np.sin(t) for t in T]
+    plt.plot(X, Y)
+    plt.axhline(0, c='g')
+    plt.axvline(0, c='g')
+    plt.scatter(data[:, 0], data[:, 1])
+
+def kdeplot(scores):
+    plt.figure(figseize=(12, 12))
+    plt.title('Scores')
+    kdeplot(scores, fill=True)
+
+-- Correlogram (heatmap-ul cu corelații)
+
+Scop: Analiza relațiilor dintre variabile printr-o matrice de corelații.
+Utilizare: EFA (Exploratory Factor Analysis), PCA, analiza corelațiilor dintre variabile.
+Interpretare: Valorile apropiate de 1 sau -1 indică corelații puternice, 0 indică lipsa corelației.
+
+-- Line Plot (grafic de linie pentru alpha - varianță explicată)
+
+Scop: Arată varianța explicată de fiecare componentă principală.
+Utilizare: PCA (Principal Component Analysis).
+Interpretare: Componentele peste linia roșie (varianță >1) sunt relevante, restul pot fi ignorate.
+
+-- Biplot (pentru CCA - Canonical Correlation Analysis)
+
+Scop: Vizualizează relația dintre seturile de variabile X și Y.
+Utilizare: CCA (Canonical Correlation Analysis).
+Interpretare: Punctele roșii și albastre arată proiecția variabilelor în noul spațiu.
+
+-- Dendrogram (ierarhizare în clustering)
+
+Scop: Afișează structura clusterelor și relațiile dintre ele.
+Utilizare: HCA (Hierarchical Cluster Analysis).
+Interpretare: Linia roșie indică pragul de tăiere pentru formarea clusterelor.
+
+-- Correlation Circle (cercul corelațiilor în PCA/FA)
+
+Scop: Arată relația dintre variabile și componentele principale.
+Utilizare: PCA și EFA.
+Interpretare: Variabilele apropiate între ele sunt corelate, iar cele mai îndepărtate de centru sunt bine reprezentate de acea componentă.
+
+-- KDE Plot (Kernel Density Estimation pentru distribuția scorurilor)
+
+Scop: Analiza distribuției scorurilor.
+Utilizare: LDA, PCA, scorurile factorilor în FA.
+Interpretare: Arată unde sunt concentrate cele mai multe observații.
